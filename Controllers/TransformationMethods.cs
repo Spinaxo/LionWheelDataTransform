@@ -4,30 +4,9 @@ namespace LionWheelDataTransform.Controllers
 {
     public class TransformationMethods
     {
-        public static TransformedDataModel.Body TransformData(RequestDataModel.Welcome requestData)
+        public static RequestDataModel TransformData(RequestDataModel requestData)
         {
-            var transformedData = new TransformedDataModel.Body()
-            {
-                // Example of direct mapping
-                OriginalOrderId = requestData.Id,
-
-                // Example of nested object mapping
-                SourceCity = requestData.Data.Address.Billing.City,
-                SourceStreet = requestData.Data.Address.Billing.AddressLine1,
-
-                // ... similar mappings for other fields
-
-                LineItems = requestData.Data.LineItems.Select(li => new TransformedDataModel.LineItem
-                {
-                    Name = li.ItemName,
-                    Quantity = li.Quantity,
-                    Price = li.UnitPrice
-                }).ToArray(),
-
-                // ... additional mappings
-            };
-
-            return transformedData;
+            return requestData;
         }
 
         public static (string, string) SeparateAddress(string address)

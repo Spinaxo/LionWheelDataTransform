@@ -4,6 +4,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using LionWheelDataTransform;
+using LionWheelDataTransform.Controllers;
+using LionWheelDataTransform.Models;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -14,7 +16,8 @@ public class TransformationController : ControllerBase
     {
         try
         {
-            var transformedData = TransformData(requestData);
+            Console.WriteLine(requestData.ToString());
+            TransformedDataModel.Body transformedData = TransformationMethods.TransformData(requestData);
 
             var response = await SendNewRequest(transformedData);
 
@@ -30,7 +33,7 @@ public class TransformationController : ControllerBase
 
 
 
-    private async Task<dynamic> SendNewRequest(RequestDataModel.Welcome data)
+    private async Task<dynamic> SendNewRequest(TransformedDataModel.Body data)
     {
         var newRequest = BuildNewRequest(data);
         Console.WriteLine("TEST 1");
