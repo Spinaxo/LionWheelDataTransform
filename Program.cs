@@ -1,3 +1,11 @@
+using AutoMapper;
+using LionWheelDataTransform;
+using LionWheelDataTransform.Models;
+using LionWheelDataTransform.Models.Request;
+using LionWheelDataTransform.Models.Transformed;
+using System.Reflection;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,7 +16,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient();
 
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

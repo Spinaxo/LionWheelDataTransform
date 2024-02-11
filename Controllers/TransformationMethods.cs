@@ -1,4 +1,6 @@
 ﻿using System.Text.RegularExpressions;
+using LionWheelDataTransform.Models;
+using LionWheelDataTransform.Models.Request;
 
 namespace LionWheelDataTransform.Controllers
 {
@@ -6,7 +8,8 @@ namespace LionWheelDataTransform.Controllers
     {
         public static RequestDataModel TransformData(RequestDataModel requestData)
         {
-            return requestData;
+            var TransformedData = requestData;
+            return TransformedData;
         }
 
         public static (string, string) SeparateAddress(string address)
