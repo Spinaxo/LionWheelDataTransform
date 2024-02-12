@@ -14,16 +14,23 @@ namespace LionWheelDataTransform.Controllers
 
         public static (string, string) SeparateAddress(string address)
         {
+
+            address = address.Trim(); // trimming any whitespace from address
+
             // Regular expression to match the street number at the beginning of the address
-            var regex = new Regex(@"^\d+\s+");
+            var regex = new Regex(@"^(\d+[A-Za-z]?)(\s*)(.*)");
             var match = regex.Match(address);
 
-            if (match.Success)
+            if (match.Success && match.Groups.Count > 2)
             {
-                string streetNumber = match.Value.Trim(); // Trim to remove any extra whitespace
-                string streetName = address.Substring(match.Length).Trim(); // Get the rest of the address as street name
+                // The street number is captured by the first group.
+                string streetNumber = match.Groups[1].Value.Trim();
+                // The rest of the address after any amount of whitespace is captured as the street name.
+                string streetName = match.Groups[3].Value.Trim(); // Adjusted to capture the remainder of the address.
+
                 return (streetNumber, streetName);
             }
+
             else
             {
                 // Handle cases where no street number is found

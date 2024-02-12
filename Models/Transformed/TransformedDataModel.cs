@@ -7,20 +7,11 @@
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
 
+     
+    
+
     public partial class TransformedDataModel
-    {
-        [JsonProperty("method")]
-        public string Method { get; set; }
-
-        [JsonProperty("header")]
-        public object[] Header { get; set; }
-
-        [JsonProperty("body")]
-        public Body Body { get; set; }
-    }
-
-    public partial class Body
-    {
+{
         [JsonProperty("pickup_at")]
         public string PickupAt { get; set; }
 
@@ -215,3 +206,5 @@
         public static readonly ParseStringConverter Singleton = new ParseStringConverter();
     }
 }
+
+

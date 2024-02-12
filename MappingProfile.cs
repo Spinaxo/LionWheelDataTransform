@@ -11,17 +11,17 @@ public class LionWheelMappingProfile : Profile
     public LionWheelMappingProfile()
     {
         CreateMap<RequestDataModel, TransformedDataModel>()
-            .ForPath(dest => dest.Body.OriginalOrderId, opt => opt.MapFrom(src => src.Id))
-            .ForPath(dest => dest.Body.Notes, opt => opt.MapFrom(src => src.Data.OrderNotes))
-            .ForPath(dest => dest.Body.PickupAt, opt => opt.MapFrom(src => src.Data.CreatedAt.ToString("o"))) // ISO 8601 format
+            .ForPath(dest => dest.OriginalOrderId, opt => opt.MapFrom(src => src.Id))
+            .ForPath(dest => dest.Notes, opt => opt.MapFrom(src => src.Data.OrderNotes))
+            .ForPath(dest => dest.PickupAt, opt => opt.MapFrom(src => src.Data.CreatedAt.ToString("o"))) // ISO 8601 format
 
-            .ForPath(dest => dest.Body.SourceCity, opt => opt.MapFrom(src => src.Data.Address.Shipping.City))
-            .ForPath(dest => dest.Body.SourceStreet, opt => opt.MapFrom(src => src.Data.Address.Shipping.AddressLine1))
-            .ForPath(dest => dest.Body.SourceEmail, opt => opt.MapFrom(src => src.Data.Email))
-            .ForPath(dest => dest.Body.SourcePhone, opt => opt.MapFrom(src => src.Data.UserContactNumber))
-            .ForPath(dest => dest.Body.SourceRecipientName, opt => opt.MapFrom(src => src.Data.UserName))
+            .ForPath(dest => dest.DestinationCity, opt => opt.MapFrom(src => src.Data.Address.Shipping.City))
+            .ForPath(dest => dest.DestinationStreet, opt => opt.MapFrom(src => src.Data.Address.Shipping.AddressLine1))
+            .ForPath(dest => dest.DestinationEmail, opt => opt.MapFrom(src => src.Data.Email))
+            .ForPath(dest => dest.DestinationPhone, opt => opt.MapFrom(src => src.Data.UserContactNumber))
+            .ForPath(dest => dest.DestinationRecipientName, opt => opt.MapFrom(src => src.Data.UserName))
 
-            .ForPath(dest => dest.Body.LineItems, opt => opt.MapFrom(src => src.Data.LineItems));
+            .ForPath(dest => dest.LineItems, opt => opt.MapFrom(src => src.Data.LineItems));
 
         // Adjusting the mapping for line items as per provided structure
         CreateMap<LionWheelDataTransform.Models.Request.LineItem, LionWheelDataTransform.Models.Transformed.LineItem>()
